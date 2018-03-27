@@ -1,0 +1,41 @@
+import java.io.InputStreamReader;
+
+public class Lühendaja_for {
+    public static void main(String[] args) throws Exception {
+        InputStreamReader reader = new InputStreamReader(System.in);
+        java.io.File fail = new java.io.File("nimed.txt");
+
+        if (fail.exists())
+            System.out.println("Fail on olemas");
+        else
+            System.out.println("Faili ei ole olemas");
+
+        java.util.Scanner sc = new java.util.Scanner(fail, "UTF-8");
+
+
+        while (sc.hasNextLine()) {
+            String rida = sc.nextLine();
+            String[] tükid = rida.split(" ");
+            String perenimi = tükid[tükid.length - 1];
+            String eesnimed = "";
+
+            for (int i = 0; i < rida.length(); i++) {
+                char c = rida.charAt(i);
+                if (Character.isUpperCase(c) || c == '-') {
+                    if (c == '-') {
+                        eesnimed += c+ " ";
+                    } else {
+                        eesnimed += c + ". ";
+                    }
+                }
+            }
+
+            System.out.println(perenimi + " " + removeLastChar(eesnimed));
+        }
+    }
+
+
+    private static String removeLastChar(String str) {
+        return str.substring(0, str.length() - 3).trim();
+    }
+}
